@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.HomeContainer{
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: transparent;
+    height: 100vh;
+    color:white;
+}
+.InteractionHome{
+    margin-top: 10%;
+    font-size: 3.4vh;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    width: 55%;
+    height:100vh;
+    margin-bottom: 20%;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+}
+.InteractionHome h2{
+    position: relative;
+    text-align: center;
+}
+
+#homeBtn{
+    position: relative;
+    height: 3rem;
+    width: 10rem;
+    margin-top: 2rem;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    background-color: #00bfff;
+    border-color: #00bfff;
+    border-style: "SUNKEN";
+    font-weight: bold;
+    color: white;
+    box-shadow: 2px 2px 20px #485f66;
+}
+#homeBtn:hover{
+    box-shadow: 2px 2px 20px #00bfff;
+}
+.Header{
+    background-color: transparent;
+    margin-top: .4rem;
+    height: 4rem;
+    width: 100%; 
+    display: flex;
+}
+#headerImg{
+    position: relative;
+    height: 90%;
+    margin-left: 1rem;
+    cursor: pointer;
+}
+
+.bgAnimation{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(20,1fr);
+    grid-template-rows: repeat(20,1fr);
+    background: #1d1d1d;
+    filter: saturate(2);
+    overflow: hidden;
+}
+
+.colorBox{
+    z-index: 2;
+    filter: brightness(1.1);
+    transition: 2s ease;
+    position: relative;
+    margin: 2px;
+    background: #1d1d1d;
+}
+
+.colorBox:hover{
+    background: #00bfff;
+    transition-duration: 0s;
+}
+
+.backgroundAmim{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: #00bfff;
+    filter: blur(60px);
+    animation: animBack 6s linear infinite;
+}
+
+@keyframes animBack {
+    0%{
+        top: -60px;
+    }
+    100%{
+        top: 120%;
+    }
+}
