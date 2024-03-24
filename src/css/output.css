@@ -1,0 +1,12 @@
+.outputCover{
+    height: 100%;
+    width: 50vw;
+}
+.Output h4{
+    height: 2.45rem;
+}
+.outputBox{
+    height:88vh;
+    width:49vw;
+    background-color: rgb(44, 44, 44);
+}

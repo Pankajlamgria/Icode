@@ -1,48 +1,72 @@
-import React, { useContext } from 'react';
-import icodecontext from '../context/Icodecontext';
-import Dropdown from 'react-bootstrap/Dropdown';
+import React, { useContext } from "react";
+import icodecontext from "../context/Icodecontext";
+import Dropdown from "react-bootstrap/Dropdown";
+import headerImg from "../media/homeicon.png"
+import { useNavigate } from "react-router-dom";
+import "../css/language.css";
+import context from "react-bootstrap/esm/AccordionContext";
+const Language = () => {  
+  const contextcontent = useContext(icodecontext);
+  const navigate=useNavigate();
+  const handleToHome=()=>{
+    navigate('/');
+    }
+  const handlerun=async()=>{
+    if(contextcontent.code==='')return ;
+    try{
+      const res=await contextcontent.handleRunCode();
+      console.log(res);
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+  return (
+    <div style={{display:'flex',width:"100%",alignItems:"center"}}>
+      <div className='Header' style={{height:"3rem",marginTop:"0px",marginRight:'0px',width:"4.5rem"}}><img id='headerImg' style={{height:'2.6rem',width:"2.6rem"}} onClick={handleToHome} src={headerImg} /></div>
+      <div style={{fontFamily:"Arial", marginBottom: "0rem" ,display:'flex',width:"87%",justifyContent:"space-between"}}>
 
-const Language = () => {
-    const contextcontent = useContext(icodecontext)
-    const arr = [["javascript", "18.15.0"], ["typescript", "5.0.3"], ["python", "3.10.0"], ["java", "15.0.2"], ["csharp", "6.12.0"], ["php", "0.2.3"]]
-    return (
-        <div>
-            <h2 style={{ marginBottom: "1rem" }}>Language: </h2>
-            <Dropdown>
-                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                    {contextcontent.lang}
-                </Dropdown.Toggle>
+        <h4 style={{display:'flex',width:'50%'}}>Language: 
+        <Dropdown style={{marginLeft:"1rem"}}>
+          <Dropdown.Toggle variant="success" id="dropdown-basic" style={{background:"#1cc5fd",boxShadow:"2px 2px 20px #485f66",border:"1px solid white"}}>
+            {contextcontent.lang}
+          </Dropdown.Toggle>
 
-                <Dropdown.Menu>
-                    <Dropdown.Item onClick={() => {
-                        contextcontent.setlang(arr[0][0]);
-                        contextcontent.setversion(arr[0][1]);
-                    }}>{arr[0][0]}</Dropdown.Item>
-                    <Dropdown.Item onClick={() => {
-                        contextcontent.setlang(arr[1][0]);
-                        contextcontent.setversion(arr[1][1]);
-                    }}>{arr[1][0]}</Dropdown.Item>
-                    <Dropdown.Item onClick={() => {
-                        contextcontent.setlang(arr[2][0]);
-                        contextcontent.setversion(arr[2][1]);
-                    }}>{arr[2][0]}</Dropdown.Item>
-                    <Dropdown.Item onClick={() => {
-                        contextcontent.setlang(arr[3][0]);
-                        contextcontent.setversion(arr[3][1]);
-                    }}>{arr[3][0]}</Dropdown.Item>
-                    <Dropdown.Item onClick={() => {
-                        contextcontent.setlang(arr[4][0]);
-                        contextcontent.setversion(arr[4][1]);
-                    }}>{arr[4][0]}</Dropdown.Item>
-                    <Dropdown.Item onClick={() => {
-                        contextcontent.setlang(arr[5][0]);
-                        contextcontent.setversion(arr[5][1]);
-                    }}>{arr[5][0]}</Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
-        </div>
+          <Dropdown.Menu>
+              <Dropdown.Item onClick={()=>{
+                  contextcontent.setlang('javascript');
+              }}>javascript</Dropdown.Item>
+              <Dropdown.Item onClick={()=>{
+                  contextcontent.setlang('css');
+              }}>css</Dropdown.Item>
+              <Dropdown.Item onClick={()=>{
+                  contextcontent.setlang('html');
+              }}>html</Dropdown.Item>
+              <Dropdown.Item onClick={()=>{
+                  contextcontent.setlang('java');
+              }}>java</Dropdown.Item>
+              <Dropdown.Item onClick={()=>{
+                  contextcontent.setlang('cpp');
+              }}>cpp</Dropdown.Item>
+              <Dropdown.Item onClick={()=>{
+                  contextcontent.setlang('php');
+              }}>php</Dropdown.Item>
+              <Dropdown.Item onClick={()=>{
+                  contextcontent.setlang('typescript');
+              }}>typescript</Dropdown.Item>
+              <Dropdown.Item onClick={()=>{
+                  contextcontent.setlang('csharp');
+              }}>c#</Dropdown.Item>
+              <Dropdown.Item onClick={()=>{
+                  contextcontent.setlang('python');
+              }}>python</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        </h4>
+        <button id="runbtn" onClick={handlerun}>Run</button>
+      </div>
+    </div>
+  );
+};
 
-    )
-}
-
-export default Language
+export default Language;
