@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import icodecontext from "./Icodecontext";
-import axios from "axios";
-// import "Access-Control-Allow-Origin"  
 
 const IcodeState = (props) => {
-  const [code, setcode] = useState("");
-  const [result,setresult]=useState("");
+  const [code, setcode] = useState("var x = 10; var y = 25; var z = x + y; console.log(\"x + y = \" + z);");
+  const [result, setresult] = useState("");
   const [lang, setlang] = useState("javascript");
   const [version, setversion] = useState("18.15.0");
+  const [apiLanguage,setApiLanguage]=useState("nodejs");
   const files = {
     javascript: {
       name: "script.js",
       language: "javascript",
-      value: "someJSCodeExample",
+      value: "var x = 10; var y = 25; var z = x + y; console.log(\"x + y = \" + z);",
       version: "15.10.0",
     },
     css: {
@@ -30,81 +29,68 @@ const IcodeState = (props) => {
     python: {
       name: "main.py",
       language: "python",
-      value: "something in python",
+      value: "print(\"Hello, World!\");",
       version: "",
     },
     java: {
       name: "app.java",
       language: "java",
-      value: "something in java",
+      value: "public class MyClass { \n public static void main(String args[]) { \n int x=10; int y=25; int z=x+y; System.out.println(\"Sum of x+y = \" + z); } }",
       version: "",
     },
-    typescript: {
-      name: "main.ts",
-      language: "typescript",
-      value: "something in typescript",
+    c: {
+      name: "main.c",
+      language: "c",
+      value: "#include<stdio.h>\n int main() { \n printf(\"Hello, World!\"); \n }",
       version: "",
     },
     csharp: {
       name: "main.cs",
       language: "csharp",
-      value: "something in csharp",
+      value: "using System; \n class Program { \n static void Main() { \n int x = 10; int y = 25; int z = x + y; Console.Write(\"Sum of x + y = \"+ z); } }",
       version: "",
     },
     php: {
       name: "main.php",
       language: "php",
-      value: "something in php",
+      value: "<?php \n $x = 25; $y = 10; $z = $x + $y; printf('Sum of x + y = %s', $z);",
       version: "",
     },
     cpp: {
       name: "main.cpp",
       language: "cpp",
-      value: "something in cpp",
+      value:
+        '#include<iostream>\nusing namespace std;\nint main(){\n    cout<<"Code here";\n}',
       version: "",
     },
   };
 
-  const API = axios.create({
-    baseURL: "https://emkc.org/v2/pistor",
-  });
-  // const handleRunCode = async () => {
-  //   const response = await API.post("/execute", {
-  //     widthCredentials:true,
-  //     language: files[lang].language,
-  //     version: files[lang].version,
-  //     files: [
-  //       {
-  //         content: code,
-  //       },
-  //     ],
-  //   });
-  //   return response.data;
-  // };
-  const handleRunCode=async()=>{
-      const options = {
-        method: 'POST',
-        url: 'https://online-code-compiler.p.rapidapi.com/v1/',
-        headers: {
-          'content-type': 'application/json',
-          'X-RapidAPI-Key': 'SIGN-UP-FOR-KEY',
-          'X-RapidAPI-Host': 'online-code-compiler.p.rapidapi.com'
-        },
-        data: {
-          language: 'python3',
-          version: 'latest',
-          code: 'print("Hello, World!");',
-          input: null
-        }
-      };
-      
-      try {
-        const response = await axios.request(options);
-        console.log(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-  }
+  // javascript fetch mode from rapid API
+  const handleRunCode = async () => {
+    const url = "https://online-code-compiler.p.rapidapi.com/v1/";
+    const options = {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "X-RapidAPI-Key": "0f0de795camsh97fb09ca27d87e6p14ecddjsnf70cfa4d51b5",
+        "X-RapidAPI-Host": "online-code-compiler.p.rapidapi.com",
+      },
+      body:JSON.stringify({
+        language: apiLanguage,
+        version: 'latest',
+        code: code,
+        input: null
+      }),
+    };
+
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      setresult(result.output);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   return (
     <icodecontext.Provider
       value={{
@@ -117,7 +103,9 @@ const IcodeState = (props) => {
         files,
         handleRunCode,
         result,
-        setresult
+        setresult,
+        apiLanguage,
+        setApiLanguage
       }}
     >
       {props.children}

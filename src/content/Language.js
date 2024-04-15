@@ -12,10 +12,8 @@ const Language = () => {
     navigate('/');
     }
   const handlerun=async()=>{
-    if(contextcontent.code==='')return ;
     try{
       const res=await contextcontent.handleRunCode();
-      console.log(res);
     }
     catch(err){
       console.log(err);
@@ -35,6 +33,8 @@ const Language = () => {
           <Dropdown.Menu>
               <Dropdown.Item onClick={()=>{
                   contextcontent.setlang('javascript');
+                  contextcontent.setApiLanguage("nodejs");
+                  contextcontent.setcode(contextcontent.files.javascript.value);
               }}>javascript</Dropdown.Item>
               <Dropdown.Item onClick={()=>{
                   contextcontent.setlang('css');
@@ -44,21 +44,33 @@ const Language = () => {
               }}>html</Dropdown.Item>
               <Dropdown.Item onClick={()=>{
                   contextcontent.setlang('java');
+                  contextcontent.setApiLanguage("java");
+                  contextcontent.setcode(contextcontent.files.java.value);
               }}>java</Dropdown.Item>
               <Dropdown.Item onClick={()=>{
                   contextcontent.setlang('cpp');
+                  contextcontent.setApiLanguage("cpp17");
+                  contextcontent.setcode(contextcontent.files.cpp.value);
               }}>cpp</Dropdown.Item>
               <Dropdown.Item onClick={()=>{
                   contextcontent.setlang('php');
+                  contextcontent.setApiLanguage('php');
+                  contextcontent.setcode(contextcontent.files.php.value);
               }}>php</Dropdown.Item>
               <Dropdown.Item onClick={()=>{
-                  contextcontent.setlang('typescript');
-              }}>typescript</Dropdown.Item>
+                  contextcontent.setlang('c');
+                  contextcontent.setApiLanguage('c');
+                  contextcontent.setcode(contextcontent.files.c.value);
+              }}>c</Dropdown.Item>
               <Dropdown.Item onClick={()=>{
                   contextcontent.setlang('csharp');
+                  contextcontent.setApiLanguage('csharp')
+                  contextcontent.setcode(contextcontent.files.csharp.value);
               }}>c#</Dropdown.Item>
               <Dropdown.Item onClick={()=>{
                   contextcontent.setlang('python');
+                  contextcontent.setApiLanguage("python3");
+                  contextcontent.setcode(contextcontent.files.python.value);
               }}>python</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

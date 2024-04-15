@@ -24,8 +24,8 @@ const Home = () => {
     }
     return (
         <div>
-            <div class="bgAnimation" id="bgAnimation">
-                <div class="backgroundAmim">
+            <div className="bgAnimation" id="bgAnimation">
+                <div className="backgroundAmim">
 
                 </div>
             </div>
