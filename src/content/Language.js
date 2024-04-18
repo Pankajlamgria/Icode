@@ -14,6 +14,7 @@ const Language = () => {
   const handlerun=async()=>{
     try{
       const res=await contextcontent.handleRunCode();
+      console.log(res);
     }
     catch(err){
       console.log(err);

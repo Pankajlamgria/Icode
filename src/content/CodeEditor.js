@@ -1,4 +1,4 @@
-import React, { useRef,useContext, useState } from 'react'
+import React, { useRef,useContext } from 'react'
 import { Editor } from '@monaco-editor/react';
 import "../css/code.css";
 import icodecontext from '../context/Icodecontext';
@@ -22,7 +22,9 @@ const CodeEditor = () => {
         <div>
             <Language/>
             <div className='editorCover'>
-                <Editor height="88vh" 
+                <Editor
+                id="Editor"
+                height="88vh" 
                 width="50vw"
                 theme='vs-dark'
                 path={file.name}

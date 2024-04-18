@@ -7,6 +7,7 @@ const IcodeState = (props) => {
   const [lang, setlang] = useState("javascript");
   const [version, setversion] = useState("18.15.0");
   const [apiLanguage,setApiLanguage]=useState("nodejs");
+  const [input,setinput]=useState("");
   const files = {
     javascript: {
       name: "script.js",
@@ -72,20 +73,37 @@ const IcodeState = (props) => {
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "X-RapidAPI-Key": "0f0de795camsh97fb09ca27d87e6p14ecddjsnf70cfa4d51b5",
+        "X-RapidAPI-Key": "26bbe97cbcmsh9a85f9c0fb7ef6ap16a14ajsn6e1cb448f028",
         "X-RapidAPI-Host": "online-code-compiler.p.rapidapi.com",
       },
       body:JSON.stringify({
         language: apiLanguage,
         version: 'latest',
         code: code,
-        input: null
+        input: input
       }),
     };
 
     try {
       const response = await fetch(url, options);
       const result = await response.json();
+      // let Out=result.output;
+      // if(Out.search("/application.js:")!==-1){
+      //   let start=Out.search("application.js:")+("application.js".length);
+      //   let end=Out.search("Error:");
+      //   let newstr=Out.substring(end);
+      //   end+=newstr.search("\n");
+      //   newstr="";
+      //   for(let i=start;i<end;i++){
+      //       newstr+=Out[i];
+      //   }
+      //   setresult(newstr);
+      //   console.log(newstr);
+      // }
+      // else{
+        // setresult(result.output);
+        //   console.log(result.output);
+        // }
       setresult(result.output);
     } catch (error) {
       console.error(error);
@@ -105,7 +123,9 @@ const IcodeState = (props) => {
         result,
         setresult,
         apiLanguage,
-        setApiLanguage
+        setApiLanguage,
+        setinput,
+        input
       }}
     >
       {props.children}
